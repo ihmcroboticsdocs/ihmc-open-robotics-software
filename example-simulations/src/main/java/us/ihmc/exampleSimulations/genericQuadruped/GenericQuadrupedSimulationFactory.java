@@ -56,7 +56,7 @@ public class GenericQuadrupedSimulationFactory
       QuadrupedInitialPositionParameters initialPositionParameters = new GenericQuadrupedDefaultInitialPosition();
       GroundContactParameters groundContactParameters = new GenericQuadrupedGroundContactParameters();
       QuadrupedSensorInformation sensorInformation = new GenericQuadrupedSensorInformation();
-      StateEstimatorParameters stateEstimatorParameters = new GenericQuadrupedStateEstimatorParameters();
+      StateEstimatorParameters stateEstimatorParameters = new GenericQuadrupedStateEstimatorParameters(false, CONTROL_DT);
       QuadrupedPositionBasedCrawlControllerParameters positionBasedCrawlControllerParameters = new GenericQuadrupedPositionBasedCrawlControllerParameters();
       GenericQuadrupedXGaitSettings xGaitSettings = new GenericQuadrupedXGaitSettings();
 
@@ -79,7 +79,7 @@ public class GenericQuadrupedSimulationFactory
       simulationFactory.setGroundContactModelType(groundContactModelType);
       simulationFactory.setGroundContactParameters(groundContactParameters);
       simulationFactory.setModelFactory(modelFactory);
-      simulationFactory.setSDFRobot(sdfRobot);
+      simulationFactory.setSimulatedRobot(sdfRobot);
       simulationFactory.setKneeOrientationsOutward(kneeOrientationsOutward);
       simulationFactory.setSCSParameters(scsParameters);
       simulationFactory.setOutputWriter(outputWriter);

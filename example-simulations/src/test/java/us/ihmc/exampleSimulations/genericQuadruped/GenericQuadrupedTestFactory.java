@@ -101,7 +101,7 @@ public class GenericQuadrupedTestFactory implements QuadrupedTestFactory
       QuadrupedInitialPositionParameters initialPositionParameters = initialPosition.get();
       GroundContactParameters groundContactParameters = new GenericQuadrupedGroundContactParameters();
       QuadrupedSensorInformation sensorInformation = new GenericQuadrupedSensorInformation();
-      StateEstimatorParameters stateEstimatorParameters = new GenericQuadrupedStateEstimatorParameters();
+      StateEstimatorParameters stateEstimatorParameters = new GenericQuadrupedStateEstimatorParameters(false, CONTROL_DT);
       QuadrupedPositionBasedCrawlControllerParameters positionBasedCrawlControllerParameters = new GenericQuadrupedPositionBasedCrawlControllerParameters();
       GenericQuadrupedXGaitSettings xGaitSettings = new GenericQuadrupedXGaitSettings();
 
@@ -126,7 +126,7 @@ public class GenericQuadrupedTestFactory implements QuadrupedTestFactory
       simulationFactory.setRecordFrequency(RECORD_FREQUENCY);
       simulationFactory.setGroundContactParameters(groundContactParameters);
       simulationFactory.setModelFactory(modelFactory);
-      simulationFactory.setSDFRobot(sdfRobot);
+      simulationFactory.setSimulatedRobot(sdfRobot);
       if (scsParameters.hasValue())
          simulationFactory.setSCSParameters(scsParameters.get());
       else
