@@ -1,0 +1,32 @@
+#ifndef __controller_msgs__msg__FingerMotorTrajectoryMessage__idl__
+#define __controller_msgs__msg__FingerMotorTrajectoryMessage__idl__
+
+#include "controller_msgs/msg/./TrajectoryPoint1DMessage_.idl"
+module controller_msgs
+{
+  module msg
+  {
+    module dds
+    {
+
+      @TypeCode(type="controller_msgs::msg::dds_::FingerMotorTrajectoryMessage_")
+      struct FingerMotorTrajectoryMessage
+      {
+        /**
+         * Unique ID used to identify this message, should preferably be consecutively increasing.
+         */
+        unsigned long sequence_id;
+        /**
+         * Delay time for each finger motor trajectory
+         */
+        double delay_time;
+        /**
+         * Desired motor position
+         */
+        controller_msgs::msg::dds::TrajectoryPoint1DMessage desired_position;
+      };
+    };
+  };
+};
+
+#endif
