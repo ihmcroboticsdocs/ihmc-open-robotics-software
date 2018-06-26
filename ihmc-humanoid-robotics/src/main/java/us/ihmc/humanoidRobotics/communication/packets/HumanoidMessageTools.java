@@ -31,6 +31,8 @@ import controller_msgs.msg.dds.DetectedObjectPacket;
 import controller_msgs.msg.dds.DoorLocationPacket;
 import controller_msgs.msg.dds.EuclideanTrajectoryMessage;
 import controller_msgs.msg.dds.EuclideanTrajectoryPointMessage;
+import controller_msgs.msg.dds.FingerMotorTrajectoryMessage;
+import controller_msgs.msg.dds.FingerTrajectoryMessage;
 import controller_msgs.msg.dds.FisheyePacket;
 import controller_msgs.msg.dds.FootLoadBearingMessage;
 import controller_msgs.msg.dds.FootTrajectoryMessage;
@@ -346,6 +348,38 @@ public class HumanoidMessageTools
       return message;
    }
 
+   public static FingerMotorTrajectoryMessage createFingerMotorTrajectoryMessage(double trajectoryTime, double delayTime, double desiredPosition)
+   {
+      FingerMotorTrajectoryMessage message = new FingerMotorTrajectoryMessage();
+      message.getDesiredPosition().setTime(trajectoryTime);
+      message.getDesiredPosition().setPosition(desiredPosition);
+      message.getDesiredPosition().setVelocity(0.0);
+      message.setDelayTime(delayTime);
+
+      return message;
+   }
+
+   public static FingerTrajectoryMessage createFingerTrajectoryMessage(RobotSide robotSide, double[] trajectoryTimes, double[] delayTimes,
+                                                                       double[] desiredPositions)
+   {
+      FingerTrajectoryMessage message = new FingerTrajectoryMessage();
+      message.setRobotSide(robotSide.toByte());
+
+      for (int i = 0; i < trajectoryTimes.length; i++)
+         message.getFingerMotorTrajectories().add().set(createFingerMotorTrajectoryMessage(trajectoryTimes[i], delayTimes[i], desiredPositions[i]));
+
+      return message;
+   }
+
+   public static FingerTrajectoryMessage createFingerTrajectoryMessage(RobotSide robotSide, FingerMotorTrajectoryMessage[] fingerMotorTrajectoryMessages)
+   {
+      FingerTrajectoryMessage message = new FingerTrajectoryMessage();
+      message.setRobotSide(robotSide.toByte());
+      MessageTools.copyData(fingerMotorTrajectoryMessages, message.getFingerMotorTrajectories());
+
+      return message;
+   }
+   
    public static BehaviorStatusPacket createBehaviorStatusPacket(CurrentBehaviorStatus requestedControl)
    {
       BehaviorStatusPacket message = new BehaviorStatusPacket();
