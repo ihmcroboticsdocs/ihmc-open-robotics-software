@@ -8,5 +8,8 @@
     "Quick Start (IntelliJ)": ["00-pre-reqs-intellij", "01-project-intellij",
     "02-setup-gradle-project-intellij", "03-new-class-intellij",
     "04-run-valkyrie-intellij", "05-run-valkyrie-scs"]
+  },
+  "IHMCcontroller": {
+    "IHMC Humanoid Controller": ["000-summary-control", "00-intro-control", "01-controllercore" , "02-yovariables"]
   }
 }
