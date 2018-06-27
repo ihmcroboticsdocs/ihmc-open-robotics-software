@@ -1,7 +1,5 @@
 ---
-
 title: Yo Variables
-
 ---
 
 To get insight into the controller while it is running some of the internal variables can be visualized from the Simulation Construction Set GUI. This section lists common variables to look at when debugging issues with the controller. It does not list all variables just the ones we commonly use to identify problems with the control algorithms.

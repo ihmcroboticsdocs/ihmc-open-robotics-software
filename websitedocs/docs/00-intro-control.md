@@ -1,7 +1,5 @@
 ---
-
 title: Introduction
-
 ---
 
 <div class="auto-resizable-iframe"><div>
