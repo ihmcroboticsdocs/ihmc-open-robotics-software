@@ -8,7 +8,7 @@
     "00-pre-reqs-eclipse": "Prerequisites",
     "Prerequisites": "Prerequisites",
     "00-pre-reqs-intellij": "Prerequisites",
-    "000-summary-control": "000-summary-control",
+    "000-summary-control": "Summary",
     "01-controllercore": "Controller Core",
     "01-project-eclipse": "Create your First GradleProject with a build.gradle File",
     "Create your First GradleProject": "Create your First GradleProject",
