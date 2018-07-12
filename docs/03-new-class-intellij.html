@@ -42,48 +42,5 @@
 <p><br/></p>
 <h3><a class="anchor" aria-hidden="true" id="valkyriedemo-class"></a><a href="#valkyriedemo-class" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ValkyrieDemo Class</h3>
 <p>You should now see a skeleton of your ValkyrieDemo class.  Replace the skeleton text with the following java source code:</p>
-<pre><code class="hljs css languages- java"><span class="hljs-keyword">package</span> us.ihmc.demo;
-
-<span class="hljs-keyword">import</span> us.ihmc.avatar.DRCFlatGroundWalkingTrack;
-<span class="hljs-keyword">import</span> us.ihmc.avatar.drcRobot.DRCRobotModel;
-<span class="hljs-keyword">import</span> us.ihmc.avatar.initialSetup.DRCGuiInitialSetup;
-<span class="hljs-keyword">import</span> us.ihmc.avatar.initialSetup.DRCRobotInitialSetup;
-<span class="hljs-keyword">import</span> us.ihmc.avatar.initialSetup.DRCSCSInitialSetup;
-<span class="hljs-keyword">import</span> us.ihmc.commonWalkingControlModules.desiredHeadingAndVelocity.HeadingAndVelocityEvaluationScriptParameters;
-<span class="hljs-keyword">import</span> us.ihmc.commonWalkingControlModules.highLevelHumanoidControl.factories.WalkingProvider;
-<span class="hljs-keyword">import</span> us.ihmc.jMonkeyEngineToolkit.GroundProfile3D;
-<span class="hljs-keyword">import</span> us.ihmc.simulationconstructionset.HumanoidFloatingRootJointRobot;
-<span class="hljs-keyword">import</span> us.ihmc.simulationconstructionset.SimulationConstructionSet;
-<span class="hljs-keyword">import</span> us.ihmc.simulationconstructionset.util.ground.FlatGroundProfile;
-<span class="hljs-keyword">import</span> us.ihmc.valkyrie.ValkyrieRobotModel;
-
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ValkyrieDemo</span>
-</span>{
-   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span>
-   </span>{
-      DRCRobotModel robotModel = <span class="hljs-keyword">new</span> ValkyrieRobotModel(DRCRobotModel.RobotTarget.SCS, <span class="hljs-keyword">false</span>); <span class="hljs-comment">// Construct the Valkyrie robot model for simulation.</span>
-      DRCGuiInitialSetup guiInitialSetup = <span class="hljs-keyword">new</span> DRCGuiInitialSetup(<span class="hljs-keyword">true</span>, <span class="hljs-keyword">false</span>); <span class="hljs-comment">// Helper configuration object for setting up the Simulation GUI</span>
-      <span class="hljs-keyword">final</span> <span class="hljs-keyword">double</span> groundHeight = <span class="hljs-number">0.0</span>; <span class="hljs-comment">// No magic numbers!</span>
-      GroundProfile3D groundProfile = <span class="hljs-keyword">new</span> FlatGroundProfile(groundHeight); <span class="hljs-comment">// Construct a ground profile</span>
-
-      DRCSCSInitialSetup scsInitialSetup = <span class="hljs-keyword">new</span> DRCSCSInitialSetup(groundProfile, robotModel.getSimulateDT()); <span class="hljs-comment">// Helper configuration object for setting up Simulation Construction Set</span>
-      scsInitialSetup.setDrawGroundProfile(<span class="hljs-keyword">true</span>); <span class="hljs-comment">// Make ground profile visible</span>
-      scsInitialSetup.setInitializeEstimatorToActual(<span class="hljs-keyword">true</span>); <span class="hljs-comment">// Seed the state estimator with a perfect starting configuration</span>
-
-      <span class="hljs-keyword">double</span> initialYaw = <span class="hljs-number">0.0</span>; <span class="hljs-comment">// No magic numbers!</span>
-      DRCRobotInitialSetup&lt;HumanoidFloatingRootJointRobot&gt; robotInitialSetup = robotModel.getDefaultRobotInitialSetup(groundHeight,
-                                                                                                                      initialYaw); <span class="hljs-comment">// Helper configuration object for the robot starting configuration</span>
-
-      <span class="hljs-keyword">boolean</span> useVelocityAndHeadingScript = <span class="hljs-keyword">true</span>; <span class="hljs-comment">// No magic... booleans?</span>
-      <span class="hljs-keyword">boolean</span> cheatWithGroundHeightAtForFootstep = <span class="hljs-keyword">false</span>; <span class="hljs-comment">// No magic... booleans?</span>
-
-      HeadingAndVelocityEvaluationScriptParameters walkingScriptParameters = <span class="hljs-keyword">new</span> HeadingAndVelocityEvaluationScriptParameters();
-      DRCFlatGroundWalkingTrack flatGroundWalkingTrack = <span class="hljs-keyword">new</span> DRCFlatGroundWalkingTrack(robotInitialSetup,
-                                                                                       guiInitialSetup, scsInitialSetup, useVelocityAndHeadingScript, cheatWithGroundHeightAtForFootstep,
-                                                                                       robotModel, WalkingProvider.VELOCITY_HEADING_COMPONENT, walkingScriptParameters); <span class="hljs-comment">// Construct a Flat Ground Walking Track, a re-usable sim environment we use to validate the basics of the walking algorithm</span>
-
-      SimulationConstructionSet scs = flatGroundWalkingTrack.getSimulationConstructionSet(); <span class="hljs-comment">// Construct the SCS instance</span>
-   }
-}
-</code></pre>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/ihmc-open-robotics-software/docs/02-setup-gradle-project-intellij.html">← Import GradleProject</a><a class="docs-next button" href="/ihmc-open-robotics-software/docs/04-run-valkyrie-intellij.html">ValkyrieDemo Run Configuration →</a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/ihmc-open-robotics-software/" class="nav-home"><img src="/ihmc-open-robotics-software/img/running-man-logo.png" alt="IHMC Open Robotics Software" width="66" height="58"/></a><div><h5>Docs</h5><a href="https://ihmcroboticsdocs.github.io/ihmc-open-robotics-software/docs/quickstarthome.html">Quick Start</a><a href="https://ihmcroboticsdocs.github.io/docs/docshome.html">Software Documentation</a></div><div><h5>Community</h5><a href="https://github.com/ihmcrobotics">GitHub</a><a href="https://www.facebook.com/TheIHMC" target="_blank" rel="noreferrer noopener">Facebook</a><a href="https://twitter.com/ihmcrobotics" target="_blank" rel="noreferrer noopener">Twitter</a><a href="https://www.youtube.com/user/DRCihmcRobotics" target="_blank" rel="noreferrer noopener">YouTube</a></div></section><section class="copyright">Copyright © 2018 IHMC Robotics </section></footer></div></body></html>
+<pre><code data-url-index="0" data-snippet="complete" id="ValkyrieDemo"></code></pre>
+<script src="../snippetautomation/codesnippets.js" sources=Array.of("https://rawgit.com/ihmcroboticsdocs/sampleproject/master/src/us/ihmc/testeuclid/ValkyrieDemo.java")></script></span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/ihmc-open-robotics-software/docs/02-setup-gradle-project-intellij.html">← Import GradleProject</a><a class="docs-next button" href="/ihmc-open-robotics-software/docs/04-run-valkyrie-intellij.html">ValkyrieDemo Run Configuration →</a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/ihmc-open-robotics-software/" class="nav-home"><img src="/ihmc-open-robotics-software/img/running-man-logo.png" alt="IHMC Open Robotics Software" width="66" height="58"/></a><div><h5>Docs</h5><a href="https://ihmcroboticsdocs.github.io/ihmc-open-robotics-software/docs/quickstarthome.html">Quick Start</a><a href="https://ihmcroboticsdocs.github.io/docs/docshome.html">Software Documentation</a></div><div><h5>Community</h5><a href="https://github.com/ihmcrobotics">GitHub</a><a href="https://www.facebook.com/TheIHMC" target="_blank" rel="noreferrer noopener">Facebook</a><a href="https://twitter.com/ihmcrobotics" target="_blank" rel="noreferrer noopener">Twitter</a><a href="https://www.youtube.com/user/DRCihmcRobotics" target="_blank" rel="noreferrer noopener">YouTube</a></div></section><section class="copyright">Copyright © 2018 IHMC Robotics </section></footer></div></body></html>
