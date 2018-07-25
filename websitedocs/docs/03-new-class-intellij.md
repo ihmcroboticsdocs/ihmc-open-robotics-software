@@ -45,4 +45,4 @@ You should now see a skeleton of your ValkyrieDemo class.  Replace the skeleton 
 <pre><code data-url-index="0" data-snippet="complete" id="ValkyrieDemo"></code></pre>
 
 
-<script src="../snippetautomation/codesnippets.js" sources=Array.of("https://rawgit.com/ihmcroboticsdocs/sampleproject/master/src/us/ihmc/testeuclid/ValkyrieDemo.java")></script>
+<script id="snippetscript" src="../snippetautomation/codesnippets.js" sources=Array.of("https://rawgit.com/ihmcroboticsdocs/sampleproject/master/src/us/ihmc/testeuclid/ValkyrieDemo.java")></script>
